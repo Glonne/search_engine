@@ -1,0 +1,49 @@
+syntax = "proto3";
+package search;
+option go_package = "./proto";
+
+service IndexService {
+    rpc Search(SearchRequest) returns (SearchResponse);
+    rpc AddDoc(AddDocRequest) returns (AddDocResponse);
+}
+
+message SearchRequest {
+    repeated string Classes = 1;
+    string Author = 2;
+    repeated string Keywords = 3;
+    int32 ViewFrom = 4;
+    int32 ViewTo = 5;
+}
+
+message SearchResponse {
+    repeated Video videos = 1;
+}
+
+message AddDocRequest {
+    string id = 1;
+    repeated Keyword keywords = 2;
+    int32 view = 3;
+    bytes bytes = 4;
+    bytes bits_feature = 5;
+}
+message Keyword {
+    string field = 1;
+    string word = 2;
+}
+
+message AddDocResponse {
+    string status = 1;
+}
+
+message Video {
+    string id = 1;
+    string title = 2;
+    int64 postTime = 3;
+    string author = 4;
+    int32 view = 5;
+    int32 like = 6;
+    int32 coin = 7;
+    int32 favorite = 8;
+    int32 share = 9;
+    repeated string keywords = 10;
+}
